@@ -54,4 +54,6 @@ fi
 source <(kubectl completion zsh)
 # endregion
 
+eval "$(zoxide init zsh --cmd cd)"
+
 autoload -U compinit
