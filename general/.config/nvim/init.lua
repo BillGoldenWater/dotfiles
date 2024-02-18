@@ -75,8 +75,6 @@ vim.g.coc_global_extensions = {
 
   "coc-toml",
   "coc-json",
-
-  "coc-spell-checker",
 }
 require("coc_init")
 -- endregion
