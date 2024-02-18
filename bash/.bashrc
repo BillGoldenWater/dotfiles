@@ -160,9 +160,6 @@ else
     start_agent;
 fi
 
-# nexttrace
-
-
 # alias
 alias brc="nvim ~/.bashrc"
 alias ncfg="nvim ~/.config/nvim/init.lua"
@@ -170,4 +167,7 @@ alias mamba="micromamba"
 
 # mamba
 mamba activate base
+
+# zoxide
+eval "$(zoxide init bash --cmd cd)"
 
