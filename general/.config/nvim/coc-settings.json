@@ -1,0 +1,3 @@
+{
+  "rust-analyzer.server.path": "~/.local/share/nvim/mason/bin/rust-analyzer"
+}
