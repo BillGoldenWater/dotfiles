@@ -2,7 +2,10 @@ fpath+=~/.zfunc
 
 
 # region zsh things
-eval "$(oh-my-posh init zsh --config ~/.oh-my-posh/custom.omp.json)"
+if [[ ($TERM_PROGRAM != "Apple_Terminal") && (! -v NVIM) ]]
+then
+  eval "$(oh-my-posh init zsh --config ~/.oh-my-posh/custom.omp.json)"
+fi
 
 source /opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 #source /opt/homebrew/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh
