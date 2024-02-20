@@ -1,0 +1,159 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "background": "#0085c6",
+          "foreground": "#ffffff",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "properties": {
+            "folder_separator_icon": "/",
+            "home_icon": "~",
+            "style": "folder"
+          },
+          "template": " {{ path .Path .Location }} ",
+          "type": "path"
+        },
+        {
+          "background": "#0085c6",
+          "foreground": "#ffffff",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "template": " \uf0ad ",
+          "type": "root"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "overflow": "hide",
+      "alignment": "right",
+      "segments": [
+        {
+          "background": "#0085c6",
+          "background_templates": ["{{ if gt .Code 0 }}#c80000{{ end }}"],
+          "foreground": "#ffffff",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "template": " {{ .Code }} ",
+          "type": "exit"
+        },
+        {
+          "background": "#0085c6",
+          "foreground": "#ffffff",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "properties": {
+            "threshold": 0
+          },
+          "template": " \ufbab{{ .FormattedMs }}\u2800",
+          "type": "executiontime"
+        },
+        {
+          "type": "rust",
+          "background": "#a3855e",
+          "foreground": "#ffffff",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "template": " \uE7a8 {{ .Full }} "
+        },
+        {
+          "background": "#6CA35E",
+          "foreground": "#ffffff",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "properties": {
+            "fetch_version": true
+          },
+          "template": " \uf898 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
+          "type": "node"
+        },
+        {
+          "background": "#a35e5e",
+          "foreground": "#ffffff",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "template": " \uE738 {{ .Full }} ",
+          "type": "java"
+        },
+        {
+          "background": "#FFDE57",
+          "foreground": "#111111",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "properties": {
+            "display_mode": "files",
+            "fetch_virtual_env": true
+          },
+          "template": " \ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }} ",
+          "type": "python"
+        },
+        {
+          "background": "#0085c6",
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}#FF9248{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#ff4500{{ end }}",
+            "{{ if gt .Ahead 0 }}#B388FF{{ end }}",
+            "{{ if gt .Behind 0 }}#B388FF{{ end }}"
+          ],
+          "foreground": "#ffffff",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "properties": {
+            "branch_max_length": 25,
+            "fetch_stash_count": true,
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          },
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \uf692 {{ .StashCount }}{{ end }} ",
+          "type": "git"
+        },
+        {
+          "background": "#0085c6",
+          "foreground": "#ffffff",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
+          "type": "os"
+        },
+        {
+          "background": "#0085c6",
+          "foreground": "#ffffff",
+          "style": "diamond",
+          "trailing_diamond": "\ue0b4",
+          "template": "{{ .Name }}",
+          "type": "shell"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "#0085c6",
+          "style": "plain",
+          "template": ">",
+          "type": "text"
+        }
+      ]
+    }
+  ],
+  "console_title_template": "{{ .PWD }} - {{ .Shell }}",
+  "final_space": true,
+  "version": 2
+}
