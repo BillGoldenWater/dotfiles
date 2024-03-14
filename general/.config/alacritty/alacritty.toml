@@ -1,0 +1,35 @@
+import = ["~/.themes/dracula/alacritty/dracula.toml"]
+
+[shell]
+program = "/bin/zsh"
+args = [
+  "--login",
+  "-c",
+  "{ tmux ls 2>/dev/null || echo \"default: create new session\"; } | fzf --print-query | tail -n 1 | sed -e \"s/:.*\\$//\" | read session_name && tmux attach-session -t $session_name 2>/dev/null || tmux new -s $session_name",
+]
+
+[window]
+resize_increments = true
+option_as_alt = "Both"
+# opacity = 0.64
+# blur = true
+
+[font]
+normal = { family = "JetBrainsMono Nerd Font Mono", style = "Regular" }
+size = 14
+
+[env]
+TERM = "xterm-256color"
+
+[keyboard]
+bindings = [
+  { key = "ArrowLeft", mods = "Option", chars = "\u001bb" },
+  { key = "ArrowRight", mods = "Option", chars = "\u001bf" },
+  { key = "ArrowLeft", mods = "Command", chars = "\u0001" },
+  { key = "ArrowRight", mods = "Command", chars = "\u0005" },
+  { key = "Slash", mods = "Control", chars = "\u001f" },
+]
+
+# [colors.primary]
+# background = "#1f2335" # tokyonight
+# background = "#111525" # tokyonight but oklch lightness 20
