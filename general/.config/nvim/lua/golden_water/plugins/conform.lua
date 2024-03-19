@@ -19,6 +19,13 @@ return {
         css = { { 'prettierd', 'prettier' } },
         scss = { { 'prettierd', 'prettier' } },
       },
+      formatters = {
+        rustfmt = {
+          prepend_args = function()
+            return { '+nightly' }
+          end,
+        },
+      },
     },
   },
 }
