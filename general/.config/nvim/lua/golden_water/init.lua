@@ -89,4 +89,4 @@ vim.opt.colorcolumn = '100'
 vim.opt.termguicolors = true
 
 -- auto change working dir to current open file's parent dir
-vim.opt.autochdir = true
+-- vim.opt.autochdir = true
