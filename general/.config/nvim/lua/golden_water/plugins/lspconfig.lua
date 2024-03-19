@@ -147,6 +147,7 @@ return {
         marksman = {},
         taplo = {},
         biome = {},
+        cssls = {},
 
         lua_ls = {
           -- cmd = {...},
