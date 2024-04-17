@@ -29,6 +29,8 @@ return {
       --    for various frameworks/libraries/etc. but you will have to
       --    set up the ones that are useful for you.
       -- 'rafamadriz/friendly-snippets',
+
+      -- 'f3fora/cmp-spell',
     },
     config = function()
       -- See `:help cmp`
@@ -87,6 +89,12 @@ return {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+          {
+            name = 'spell',
+            enable_in_context = function()
+              return require('cmp.config.context').in_treesitter_capture 'spell'
+            end,
+          },
         },
       }
     end,

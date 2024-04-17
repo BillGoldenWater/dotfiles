@@ -30,7 +30,7 @@ vim.opt.showmode = false
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.opt.clipboard = 'unnamedplus'
+-- vim.opt.clipboard = 'unnamedplus'
 
 -- indent
 vim.opt.expandtab = true
@@ -87,6 +87,10 @@ vim.opt.colorcolumn = '100'
 
 -- color
 vim.opt.termguicolors = true
+
+-- spell
+vim.opt.spell = true
+vim.opt.spelllang = 'en_us'
 
 -- auto change working dir to current open file's parent dir
 -- vim.opt.autochdir = true

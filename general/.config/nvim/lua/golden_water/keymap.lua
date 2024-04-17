@@ -69,3 +69,6 @@ vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'open netrw' })
 -- move selected region
 vim.keymap.set('v', 'J', "<cmd>m '>+1<CR>gv=gv", { desc = 'move selected text down' })
 vim.keymap.set('v', 'K', "<cmd>m '<-2<CR>gv=gv", { desc = 'move selected text up' })
+
+-- copy to clipboard
+vim.keymap.set('v', '<leader>y', '"+y', { desc = 'copy to clipboard' })
