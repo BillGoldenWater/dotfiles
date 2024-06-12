@@ -148,6 +148,7 @@ return {
         taplo = {},
         biome = {},
         cssls = {},
+        wgsl_analyzer = {},
 
         lua_ls = {
           -- cmd = {...},

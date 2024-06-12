@@ -12,6 +12,8 @@ end
 
 vim.cmd 'language en_US.UTF-8'
 
+vim.filetype.add { extension = { wgsl = 'wgsl' } }
+
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
