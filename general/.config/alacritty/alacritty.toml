@@ -2,16 +2,20 @@ import = ["~/.themes/dracula/alacritty/dracula.toml"]
 
 [shell]
 program = "/bin/zsh"
-args = [
-  "--login",
-  "-c",
-  "{ tmux ls 2>/dev/null || echo \"default: create new session\"; } | fzf --print-query | tail -n 1 | sed -e \"s/:.*\\$//\" | read session_name && tmux attach-session -t $session_name 2>/dev/null || tmux new -s $session_name",
-]
+args = ["--login"]
+
+# [shell]
+# program = "/bin/zsh"
+# args = [
+#   "--login",
+#   "-c",
+#   "{ tmux ls 2>/dev/null || echo \"default: create new session\"; } | fzf --print-query | tail -n 1 | sed -e \"s/:.*\\$//\" | read session_name && tmux attach-session -t $session_name 2>/dev/null || tmux new -s $session_name",
+# ]
 
 [window]
 resize_increments = true
 option_as_alt = "Both"
-startup_mode = "Maximized"
+# startup_mode = "Maximized"
 # opacity = 0.64
 # blur = true
 
