@@ -1,6 +1,9 @@
 [ -f ~/.oh-my-zsh.zsh ] && source ~/.oh-my-zsh.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# opam configuration
+[[ ! -r ~/.opam/opam-init/init.zsh ]] || source ~/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
 fpath+=~/.zfunc
 
 # syntax highlighting
