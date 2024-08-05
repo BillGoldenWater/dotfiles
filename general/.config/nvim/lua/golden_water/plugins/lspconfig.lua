@@ -155,6 +155,7 @@ return {
         biome = {},
         cssls = {},
         wgsl_analyzer = {},
+        kotlin_language_server = {},
 
         lua_ls = {
           -- cmd = {...},
