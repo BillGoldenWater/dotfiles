@@ -14,13 +14,7 @@
   - tmux plugin manager 
     - `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
 - zsh
-- zsh-syntax-highlighting
-  - dracula
-    - `git clone https://github.com/dracula/zsh-syntax-highlighting ~/.themes/dracula/zsh-syntax-highlighting`
-- oh-my-zsh
-  - dracula
-    - `git clone https://github.com/dracula/zsh ~/.themes/dracula/zsh`
-    - `ln -s ~/.themes/dracula/zsh/dracula.zsh-theme ~/.oh-my-zsh/themes/dracula.zsh-theme`
+- eza
 - fzf
 - zoxide
 - nvim

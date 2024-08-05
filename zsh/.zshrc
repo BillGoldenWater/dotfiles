@@ -1,32 +1,24 @@
-[ -f ~/.oh-my-zsh.zsh ] && source ~/.oh-my-zsh.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source ~/.zshsetup
 
 # opam configuration
 [[ ! -r ~/.opam/opam-init/init.zsh ]] || source ~/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
-
-fpath+=~/.zfunc
-
-# syntax highlighting
-source ~/.themes/dracula/zsh-syntax-highlighting/zsh-syntax-highlighting.sh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# zsh_history size
-export HISTSIZE=100000
-export SAVEHIST=$HISTSIZE
-setopt inc_append_history share_history
-
-setopt HIST_SAVE_NO_DUPS
-setopt HIST_IGNORE_DUPS
 
 # alias
 alias ll="ls -lah"
 alias vim="nvim"
 
 # kubectl
-source <(kubectl completion zsh)
+# source <(kubectl completion zsh)
 
 # zoxide
-eval "$(zoxide init zsh --cmd cd)"
+if [[ -v commands[zoxide] ]] then
+    eval "$(zoxide init zsh --cmd cd)"
+fi
+
+# fnm
+if [[ -v commands[fnm] ]] then
+    eval "`fnm env`"
+fi
 
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/homebrew/Caskroom/mambaforge/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
