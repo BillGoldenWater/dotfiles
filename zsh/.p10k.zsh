@@ -63,6 +63,7 @@
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
     command_execution_time    # previous command duration
+    status
     virtualenv                # python virtual environment
     context                   # user@host
     # time                    # current time
@@ -111,9 +112,9 @@
   typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_CONTENT_EXPANSION=
 
   # Show previous command duration only if it's >= 5s.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=5
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
   # Don't show fractional seconds. Thus, 7s rather than 7.3s.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=0
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=3
   # Duration format: 1d 2h 3m 4s.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FORMAT='d h m s'
   # Yellow previous command duration.
