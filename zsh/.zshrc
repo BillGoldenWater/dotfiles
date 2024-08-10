@@ -6,6 +6,7 @@ source ~/.zshsetup
 # alias
 alias ll="ls -lah"
 alias vim="nvim"
+alias n="nvim ."
 
 # kubectl
 # source <(kubectl completion zsh)
