@@ -8,13 +8,11 @@ vim.g.maplocalleader = ' '
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
--- Clear search highlight on pressing <Esc> in normal mode
+-- Clear highlights on search when pressing <Esc> in normal mode
+--  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
@@ -49,7 +47,7 @@ vim.keymap.set('n', 'n', 'nzzzv', { desc = 'next item, center, unfold to cursor'
 vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'previous item, center, unfold to cursor' })
 
 -- buffers
-vim.keymap.set('n', '<leader>bd', '<cmd>bdelete<cr>', { desc = '[B]uffer [D]elete (unload)' })
+vim.keymap.set('n', '<leader>bq', '<cmd>bdelete<cr>', { desc = '[B]uffer [Q]uit(delete) (unload)' })
 vim.keymap.set('n', '<leader>bn', '<cmd>bnext<cr>', { desc = '[B]uffer [N]ext' })
 vim.keymap.set('n', '<leader>bp', '<cmd>bprevious<cr>', { desc = '[B]uffer [P]revious' })
 vim.keymap.set('n', '<leader>bl', '<cmd>buffers<cr>', { desc = '[B]uffer [L]ist' })

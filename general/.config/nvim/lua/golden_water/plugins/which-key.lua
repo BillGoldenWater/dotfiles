@@ -9,13 +9,15 @@ return {
       require('which-key').add {
         { '<leader>b', group = '[B]uffer' },
         { '<leader>t', group = '[T]ab' },
+        { '<leader>g', group = '[G]it' },
 
         { '<leader>c', group = '[C]ode' },
+        { '<leader>ch', group = '[C]ode Inlay [H]ints' },
         { '<leader>d', group = '[D]ocument' },
         { '<leader>r', group = '[R]ename' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>w', group = '[W]orkspace' },
-        { '<leader>g', group = '[G]it' },
+        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
       }
     end,
   },
