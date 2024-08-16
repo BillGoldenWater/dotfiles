@@ -62,7 +62,7 @@ vim.keymap.set('n', '<leader>tp', '<cmd>tabprevious<cr>', { desc = '[T]ab [P]rev
 vim.keymap.set('v', '<leader>p', '"_dP', { desc = 'replace current selection' })
 
 -- netrw
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'open netrw' })
+-- vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'open netrw' })
 
 -- move selected region
 vim.keymap.set('v', 'J', "<cmd>m '>+1<CR>gv=gv", { desc = 'move selected text down' })
