@@ -1,3 +1,4 @@
+source ~/.zshsetupenv
 source ~/.zshsetup
 
 # opam configuration
