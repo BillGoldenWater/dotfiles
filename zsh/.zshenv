@@ -1,5 +1,5 @@
 # homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+[ -e "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # jetbrains
 export PATH="$PATH:/Users/golden_water/Library/Application Support/JetBrains/Toolbox/scripts"
@@ -21,7 +21,7 @@ export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
 # cargo
-. "$HOME/.cargo/env"
+[ -e "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 # go
 export PATH="/Users/golden_water/go/bin:$PATH"
