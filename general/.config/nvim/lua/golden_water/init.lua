@@ -94,7 +94,7 @@ vim.opt.fixendofline = false
 vim.opt.wrap = true
 
 -- line length indicator
-vim.opt.colorcolumn = '100'
+vim.opt.colorcolumn = '74,100'
 
 -- color
 vim.opt.termguicolors = true
