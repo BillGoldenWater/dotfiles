@@ -192,7 +192,8 @@ return {
         --
         marksman = {},
         taplo = {},
-        biome = {},
+        -- biome = {},
+        denols = {},
         cssls = {},
         wgsl_analyzer = {},
         kotlin_language_server = {},
