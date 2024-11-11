@@ -22,6 +22,18 @@ if [[ -v commands[fnm] ]] then
     eval "`fnm env`"
 fi
 
+# zen browser, open file in cli
+__ZEN_EXECUTABLE_PATH="/Applications/Zen Browser.app/Contents/MacOS/zen"
+if [[ -e $__ZEN_EXECUTABLE_PATH ]] then
+    function zen_file () {
+        if [[ ! -z $1 ]] then
+            $__ZEN_EXECUTABLE_PATH file://$(realpath $1)
+        else
+            echo Empty file path to open
+        fi
+    }
+fi
+
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/homebrew/Caskroom/mambaforge/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
