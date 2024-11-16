@@ -9,6 +9,9 @@ alias ll="ls -lah"
 alias vim="nvim"
 alias n="nvim ."
 
+# vi keybinding
+bindkey -v
+
 # kubectl
 # source <(kubectl completion zsh)
 
