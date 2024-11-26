@@ -193,7 +193,16 @@ return {
         marksman = {},
         taplo = {},
         -- biome = {},
-        denols = {},
+        denols = {
+          root_dir = function(start_path)
+            local dir = require('lspconfig.util').root_pattern('deno.json', 'deno.jsonrc', '.git')(start_path)
+            if dir ~= nil then
+              return dir
+            else
+              return vim.uv.cwd()
+            end
+          end,
+        },
         cssls = {},
         wgsl_analyzer = {},
         kotlin_language_server = {},
