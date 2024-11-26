@@ -18,6 +18,7 @@
 - fzf
 - zoxide
 - nvim
+- micromamba
 
 # Stow Installation
 macOS: `brew install stow`
