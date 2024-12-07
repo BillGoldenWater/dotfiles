@@ -206,6 +206,9 @@ return {
         cssls = {},
         wgsl_analyzer = {},
         kotlin_language_server = {},
+        ocamllsp = {},
+        -- java
+        jdtls = {},
 
         lua_ls = {
           -- cmd = {...},

@@ -36,6 +36,7 @@ return {
         rust = { 'rustfmt' },
         css = { 'prettierd', 'prettier', stop_after_first = true },
         scss = { 'prettierd', 'prettier', stop_after_first = true },
+        ocaml = { 'ocamlformat' },
       },
       formatters = {
         rustfmt = {
