@@ -8,6 +8,7 @@ source ~/.zshsetup
 alias ll="ls -lah"
 alias vim="nvim"
 alias n="nvim ."
+alias clear_scroll="clear && printf '\e[3J'"
 
 # vi keybinding
 bindkey -v
