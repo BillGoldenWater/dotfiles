@@ -140,9 +140,12 @@ export NVM_DIR="$HOME/.nvm"
 # cargo
 . "$HOME/.cargo/env"
 
-SSH_ENV="$HOME/.ssh/agent-environment"
+# golang
+export PATH=$PATH:/usr/local/go/bin
 
 # ssh-agent
+SSH_ENV="$HOME/.ssh/agent-environment"
+
 function start_agent {
     echo "Initialising new SSH agent..."
     /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
@@ -164,9 +167,6 @@ fi
 alias brc="nvim ~/.bashrc"
 alias ncfg="nvim ~/.config/nvim/init.lua"
 alias mamba="micromamba"
-
-# mamba
-mamba activate base
 
 # zoxide
 eval "$(zoxide init bash --cmd cd)"
