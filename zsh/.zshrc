@@ -26,6 +26,13 @@ if [[ -v commands[fnm] ]] then
     eval "`fnm env`"
 fi
 
+# alacritty
+if [[ -v commands[alacritty] ]] then
+    alacritty_big_font () {
+        alacritty msg config "font.size=25.5"
+    }
+fi
+
 # zen browser, open file in cli
 __ZEN_EXECUTABLE_PATH="/Applications/Zen Browser.app/Contents/MacOS/zen"
 if [[ -e $__ZEN_EXECUTABLE_PATH ]] then
