@@ -1,6 +1,6 @@
 [terminal.shell]
-program = "/bin/zsh"
-args = ["--login"]
+program = "/usr/bin/env"
+args = ["zsh", "--login"]
 
 # [shell]
 # program = "/bin/zsh"
