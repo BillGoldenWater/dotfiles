@@ -6,7 +6,7 @@ return {
     },
 
     -- use a release tag to download pre-built binaries
-    version = 'v0.*',
+    version = '*',
     -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
     -- build = 'cargo build --release',
     -- If you use nix, you can build from source using latest nightly rust with:
@@ -38,25 +38,12 @@ return {
         nerd_font_variant = 'mono',
       },
 
-      snippets = {
-        expand = function(snippet)
-          require('luasnip').lsp_expand(snippet)
-        end,
-        active = function(filter)
-          if filter and filter.direction then
-            return require('luasnip').jumpable(filter.direction)
-          end
-          return require('luasnip').in_snippet()
-        end,
-        jump = function(direction)
-          require('luasnip').jump(direction)
-        end,
-      },
+      snippets = { preset = 'luasnip' },
 
       -- default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, via `opts_extend`
       sources = {
-        default = { 'lsp', 'path', 'luasnip', 'buffer' },
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
         -- optionally disable cmdline completions
         -- cmdline = {},
       },
