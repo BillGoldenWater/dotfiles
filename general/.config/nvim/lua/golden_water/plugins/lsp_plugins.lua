@@ -191,6 +191,7 @@ return {
         -- tsserver = {},
         --
         marksman = {},
+        -- toml
         taplo = {},
         -- biome = {},
         denols = {
@@ -209,6 +210,11 @@ return {
         ocamllsp = {},
         -- java
         jdtls = {},
+        -- zig
+        zls = {},
+        glslls = {
+          cmd = { 'glslls', '--stdin', '--target-env', 'opengl' },
+        },
 
         lua_ls = {
           -- cmd = {...},
