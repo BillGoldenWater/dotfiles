@@ -2,8 +2,7 @@ return {
   {
     'saghen/blink.cmp',
     dependencies = {
-      -- optional: provides snippets for the snippet source
-      'rafamadriz/friendly-snippets',
+      { 'L3MON4D3/LuaSnip' },
     },
 
     -- use a release tag to download pre-built binaries
@@ -21,7 +20,13 @@ return {
       -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
       -- see the "default configuration" section below for full documentation on how to define
       -- your own keymap.
-      keymap = { preset = 'default' },
+      keymap = {
+        preset = 'default',
+        ['<Tab>'] = {},
+        ['<Tab-S>'] = {},
+        ['<C-l>'] = { 'snippet_forward', 'fallback' },
+        ['<C-h>'] = { 'snippet_backward', 'fallback' },
+      },
 
       appearance = {
         -- Sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -33,10 +38,25 @@ return {
         nerd_font_variant = 'mono',
       },
 
+      snippets = {
+        expand = function(snippet)
+          require('luasnip').lsp_expand(snippet)
+        end,
+        active = function(filter)
+          if filter and filter.direction then
+            return require('luasnip').jumpable(filter.direction)
+          end
+          return require('luasnip').in_snippet()
+        end,
+        jump = function(direction)
+          require('luasnip').jump(direction)
+        end,
+      },
+
       -- default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, via `opts_extend`
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        default = { 'lsp', 'path', 'luasnip', 'buffer' },
         -- optionally disable cmdline completions
         -- cmdline = {},
       },
