@@ -1,6 +1,9 @@
 [build]
 target-dir = ".cargo/shared_target"
 
+[resolver]
+incompatible-rust-versions = "fallback"
+
 # On Windows 
 # ```
 # cargo install -f cargo-binutils
