@@ -45,6 +45,11 @@ if [[ -e $__ZEN_EXECUTABLE_PATH ]] then
     }
 fi
 
+if [[ -e ~/.motd ]] then
+    typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+    cat ~/.motd
+fi
+
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba shell init' !!
 export MAMBA_EXE='/opt/homebrew/bin/mamba';
