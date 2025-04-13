@@ -23,6 +23,9 @@ return {
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       require('tokyonight').setup {
+        styles = {
+          comments = { italic = false }, -- Disable italics in comments
+        },
         -- transparent = true,
         on_colors = function(colors)
           local Util = require 'tokyonight.util'
