@@ -274,6 +274,7 @@ return {
             },
           },
         },
+        dotls = {},
       }
 
       -- Ensure the servers and tools above are installed
