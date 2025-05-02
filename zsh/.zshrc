@@ -6,8 +6,6 @@ source ~/.zshsetup
 
 # alias
 alias ll="ls -lah"
-alias vim="nvim"
-alias n="nvim ."
 alias clear_scroll="clear && printf '\e[3J'"
 
 # vi keybinding
@@ -30,18 +28,6 @@ fi
 if [[ -v commands[alacritty] ]] then
     alacritty_big_font () {
         alacritty msg config "font.size=25.5"
-    }
-fi
-
-# zen browser, open file in cli
-__ZEN_EXECUTABLE_PATH="/Applications/Zen Browser.app/Contents/MacOS/zen"
-if [[ -e $__ZEN_EXECUTABLE_PATH ]] then
-    function zen_file () {
-        if [[ ! -z $1 ]] then
-            $__ZEN_EXECUTABLE_PATH file://$(realpath $1)
-        else
-            echo Empty file path to open
-        fi
     }
 fi
 
