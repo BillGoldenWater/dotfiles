@@ -290,12 +290,12 @@ return {
       --
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
-      local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format lua code
-        'prettier', -- javascript/typescript
-      })
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+      -- local ensure_installed = vim.tbl_keys(servers or {})
+      -- vim.list_extend(ensure_installed, {
+      --   'stylua', -- Used to format lua code
+      --   'prettier', -- javascript/typescript
+      -- })
+      -- require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
@@ -318,6 +318,65 @@ return {
           end,
         },
       }
+
+      -- prompt for LSPs that is exists in servers but not installed
+      local servers_of_filetype = {
+        lua = { stylua = true },
+        javascript = { prettier = true },
+        typescript = { prettier = true },
+      }
+      local installed_servers = {}
+      local mason_to_lspconfig = require('mason-lspconfig').get_mappings().mason_to_lspconfig
+      for _, tool in ipairs(require('mason-registry').get_installed_package_names()) do
+        if mason_to_lspconfig[tool] == nil then
+          installed_servers[tool] = true
+        else
+          installed_servers[mason_to_lspconfig[tool]] = true
+        end
+      end
+
+      local lspconfig = require 'lspconfig'
+      for server_name in pairs(servers) do
+        local filetypes = lspconfig[server_name].config_def.default_config.filetypes
+        for _, filetype in ipairs(filetypes) do
+          if servers_of_filetype[filetype] == nil then
+            servers_of_filetype[filetype] = {}
+          end
+          servers_of_filetype[filetype][server_name] = true
+        end
+      end
+
+      vim.api.nvim_create_autocmd({ 'FileType' }, {
+        desc = 'Prompt for LSPs that is exists in servers but not installed',
+
+        group = vim.api.nvim_create_augroup('goldenwater-lsp-prompt-install', { clear = true }),
+        callback = function()
+          if vim.bo.buftype ~= '' then
+            return
+          end
+          local configured_servers = servers_of_filetype[vim.bo.filetype]
+          if configured_servers == nil then
+            return
+          end
+
+          local missing_servers = {}
+          for _, server in ipairs(vim.tbl_keys(configured_servers)) do
+            if installed_servers[server] == nil then
+              table.insert(missing_servers, server)
+            end
+          end
+
+          if #missing_servers == 0 then
+            return
+          end
+
+          local msg = 'Configured servers that are missing for this file type: ' .. table.concat(missing_servers, ', ')
+          -- schedule for avoid override when startup
+          vim.schedule(function()
+            vim.api.nvim_echo({ { msg } }, true, {})
+          end)
+        end,
+      })
     end,
   },
 }
