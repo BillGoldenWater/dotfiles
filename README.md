@@ -2,6 +2,7 @@
 1. clone to ~/dotfiles
 2. cd ~/dotfiles
 3. use stow to link:
+  - NOTE: see tmux section before link if using tmux
   - zsh: `stow general zsh`
   - bash: `stow general bash`
 
@@ -10,6 +11,8 @@
 - alacritty
 - tmux
   - tmux plugin manager 
+    - avoid plugins installed into dotfiles
+      - `mkdir -p ~/.config/tmux/plugins`
     - `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
 - zsh
 - eza
