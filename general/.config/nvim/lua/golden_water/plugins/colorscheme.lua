@@ -157,6 +157,8 @@ return {
 
       -- Load the colorscheme here
       vim.cmd.colorscheme 'tokyonight'
+      vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#444444', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'EndOfBuffer', { fg = '#444444', bg = 'NONE' })
     end,
   },
 }
