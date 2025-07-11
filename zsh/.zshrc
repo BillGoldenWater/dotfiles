@@ -33,6 +33,21 @@ if [[ -v commands[alacritty] ]] then
     }
 fi
 
+if command -v tmux >/dev/null; then
+    tmux_layout_default () {
+        if [ -n "$TMUX" ]; then
+            tmux split-window -v
+            tmux resize-pane -y 85%
+            tmux select-pane -t 0
+            tmux split-window -h
+            tmux select-pane -t 2
+            tmux send-keys 'nvim +vsplit +vsplit +"wincmd h"' "Enter"
+        else
+            echo "not in tmux session"
+        fi
+    }
+fi
+
 if [[ -e ~/.motd ]] then
     typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
     cat ~/.motd
