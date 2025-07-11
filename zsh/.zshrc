@@ -17,17 +17,17 @@ bindkey -v
 # source <(kubectl completion zsh)
 
 # zoxide
-if [[ -v commands[zoxide] ]] then
+if command -v zoxide; then
     eval "$(zoxide init zsh --cmd cd)"
 fi
 
 # fnm
-if [[ -v commands[fnm] ]] then
+if command -v fnm >/dev/null; then
     eval "`fnm env`"
 fi
 
 # alacritty
-if [[ -v commands[alacritty] ]] then
+if command -v alacritty >/dev/null; then
     alacritty_big_font () {
         alacritty msg config "font.size=25.5"
     }
