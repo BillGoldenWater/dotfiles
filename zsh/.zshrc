@@ -17,7 +17,7 @@ bindkey -v
 # source <(kubectl completion zsh)
 
 # zoxide
-if command -v zoxide; then
+if command -v zoxide >/dev/null; then
     eval "$(zoxide init zsh --cmd cd)"
 fi
 
