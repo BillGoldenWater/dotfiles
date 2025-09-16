@@ -449,7 +449,7 @@ theme =
 
 # Background color for the window.
 # Specified as either hex (`#RRGGBB` or `RRGGBB`) or a named X11 color.
-background = #2b2b2b
+background = #161616
 
 # Foreground color for the window.
 # Specified as either hex (`#RRGGBB` or `RRGGBB`) or a named X11 color.
@@ -936,7 +936,7 @@ cursor-style-blink =
 # Since version 1.2.0, this can also be set to `cell-foreground` to match
 # the cell foreground color, or `cell-background` to match the cell
 # background color.
-cursor-text = #2b2b2b
+cursor-text = #161616
 
 # Enables the ability to move the cursor at prompts by using `alt+click` on
 # Linux and `option+click` on macOS.

@@ -42,9 +42,9 @@ return {
 
           -- custom here
           palette = vim.tbl_deep_extend('force', palette, {
-            bg = '#1c1c1c',
-            bg_dark = '#171717',
-            bg_highlight = '#2f2f2f',
+            bg = '#161616',
+            bg_dark = '#0b0b0b',
+            bg_highlight = '#222222',
             comment = '#626262',
             dark3 = '#5e5e5e',
             dark5 = '#7d7d7d',
@@ -159,6 +159,7 @@ return {
       vim.cmd.colorscheme 'tokyonight'
       vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#444444', bg = 'NONE' })
       vim.api.nvim_set_hl(0, 'EndOfBuffer', { fg = '#444444', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'TreesitterContext', { fg = 'NONE', bg = '#222222' })
     end,
   },
 }
