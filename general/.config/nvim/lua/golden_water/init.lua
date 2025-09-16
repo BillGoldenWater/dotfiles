@@ -105,7 +105,7 @@ vim.opt.termguicolors = true
 
 -- spell
 vim.opt.spell = true
-vim.opt.spelllang = 'en_us'
+vim.opt.spelllang = { 'en_us', 'cjk' }
 
 -- auto change working dir to current open file's parent dir
 -- vim.opt.autochdir = true
