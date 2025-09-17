@@ -276,6 +276,9 @@ return {
         },
         dotls = {},
       }
+      if vim.fn.executable 'nu' == 1 then
+        require('lspconfig').nushell.setup {}
+      end
 
       -- Ensure the servers and tools above are installed
       --
