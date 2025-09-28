@@ -20,8 +20,8 @@ return {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       -- Mason must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-      { 'williamboman/mason.nvim', opts = {} },
-      'williamboman/mason-lspconfig.nvim',
+      { 'mason-org/mason.nvim', opts = {} },
+      'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
@@ -277,7 +277,7 @@ return {
         dotls = {},
       }
       if vim.fn.executable 'nu' == 1 then
-        require('lspconfig').nushell.setup {}
+        vim.lsp.enable 'nushell'
       end
 
       -- Ensure the servers and tools above are installed
@@ -317,35 +317,48 @@ return {
                 },
               },
             }, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            vim.lsp.config(server_name, server)
           end,
         },
       }
 
       -- prompt for LSPs that is exists in servers but not installed
-      local servers_of_filetype = {
+      local installed_servers = {}
+      local package_to_lspconfig = require('mason-lspconfig').get_mappings().package_to_lspconfig
+      for _, tool in ipairs(require('mason-registry').get_installed_package_names()) do
+        local tool_name = package_to_lspconfig[tool] or tool
+        installed_servers[tool_name] = true
+      end
+
+      -- required servers of file type
+      local required_servers = {
         lua = { stylua = true },
         javascript = { prettier = true },
         typescript = { prettier = true },
       }
-      local installed_servers = {}
-      local mason_to_lspconfig = require('mason-lspconfig').get_mappings().mason_to_lspconfig
-      for _, tool in ipairs(require('mason-registry').get_installed_package_names()) do
-        if mason_to_lspconfig[tool] == nil then
-          installed_servers[tool] = true
-        else
-          installed_servers[mason_to_lspconfig[tool]] = true
+      for server_name in pairs(servers) do
+        local filetypes = vim.lsp.config[server_name].filetypes
+
+        for _, filetype in ipairs(filetypes or {}) do
+          if required_servers[filetype] == nil then
+            required_servers[filetype] = {}
+          end
+
+          required_servers[filetype][server_name] = true
         end
       end
 
-      local lspconfig = require 'lspconfig'
-      for server_name in pairs(servers) do
-        local filetypes = lspconfig[server_name].config_def.default_config.filetypes
-        for _, filetype in ipairs(filetypes) do
-          if servers_of_filetype[filetype] == nil then
-            servers_of_filetype[filetype] = {}
+      -- missing servers of file type
+      local missing_servers_msg = {}
+      for ft, server_names in pairs(required_servers) do
+        local missing_servers = {}
+        for server in pairs(server_names) do
+          if installed_servers[server] == nil then
+            table.insert(missing_servers, server)
           end
-          servers_of_filetype[filetype][server_name] = true
+        end
+        if #missing_servers > 0 then
+          missing_servers_msg[ft] = table.concat(missing_servers, ', ')
         end
       end
 
@@ -357,23 +370,13 @@ return {
           if vim.bo.buftype ~= '' then
             return
           end
-          local configured_servers = servers_of_filetype[vim.bo.filetype]
-          if configured_servers == nil then
+
+          local msg = missing_servers_msg[vim.bo.filetype]
+          if msg == nil then
             return
           end
 
-          local missing_servers = {}
-          for _, server in ipairs(vim.tbl_keys(configured_servers)) do
-            if installed_servers[server] == nil then
-              table.insert(missing_servers, server)
-            end
-          end
-
-          if #missing_servers == 0 then
-            return
-          end
-
-          local msg = 'Configured servers that are missing for this file type: ' .. table.concat(missing_servers, ', ')
+          msg = 'Configured servers that are missing for this file type: ' .. msg
           -- schedule for avoid override when startup
           vim.schedule(function()
             vim.api.nvim_echo({ { msg } }, true, {})
