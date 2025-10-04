@@ -205,6 +205,13 @@ return {
       --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
+      local installed_servers = {}
+      local package_to_lspconfig = require('mason-lspconfig').get_mappings().package_to_lspconfig
+      for _, tool in ipairs(require('mason-registry').get_installed_package_names()) do
+        local tool_name = package_to_lspconfig[tool] or tool
+        installed_servers[tool_name] = true
+      end
+
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
@@ -219,9 +226,11 @@ return {
         gopls = {},
         pyright = {},
         rust_analyzer = {
-          init_options = {
-            check = {
-              command = 'clippy',
+          settings = {
+            ['rust-analyzer'] = {
+              check = {
+                command = 'clippy',
+              },
             },
           },
         },
@@ -280,6 +289,18 @@ return {
         vim.lsp.enable 'nushell'
       end
 
+      for s, cfg in pairs(servers) do
+        cfg.capabilities = vim.tbl_deep_extend('force', {
+          textDocument = {
+            foldingRange = {
+              dynamicRegistration = false,
+              lineFoldingOnly = true,
+            },
+          },
+        }, capabilities, cfg.capabilities or {})
+        vim.lsp.config(s, cfg)
+      end
+
       -- Ensure the servers and tools above are installed
       --
       -- To check the current status of installed tools and/or manually install
@@ -303,33 +324,9 @@ return {
       require('mason-lspconfig').setup {
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
         automatic_installation = false,
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend('force', {
-              textDocument = {
-                foldingRange = {
-                  dynamicRegistration = false,
-                  lineFoldingOnly = true,
-                },
-              },
-            }, capabilities, server.capabilities or {})
-            vim.lsp.config(server_name, server)
-          end,
-        },
       }
 
       -- prompt for LSPs that is exists in servers but not installed
-      local installed_servers = {}
-      local package_to_lspconfig = require('mason-lspconfig').get_mappings().package_to_lspconfig
-      for _, tool in ipairs(require('mason-registry').get_installed_package_names()) do
-        local tool_name = package_to_lspconfig[tool] or tool
-        installed_servers[tool_name] = true
-      end
-
       -- required servers of file type
       local required_servers = {
         lua = { stylua = true },
