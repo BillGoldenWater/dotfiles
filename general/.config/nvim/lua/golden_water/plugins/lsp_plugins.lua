@@ -288,6 +288,7 @@ return {
       if vim.fn.executable 'nu' == 1 then
         vim.lsp.enable 'nushell'
       end
+      vim.lsp.enable 'gdscript'
 
       for s, cfg in pairs(servers) do
         cfg.capabilities = vim.tbl_deep_extend('force', {
