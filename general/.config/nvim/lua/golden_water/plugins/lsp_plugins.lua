@@ -245,7 +245,9 @@ return {
         marksman = {},
         -- toml
         taplo = {},
+        emmet_language_server = {},
         -- js/ts
+        ts_ls = {},
         -- biome = {},
         denols = {
           root_dir = function(start_path)
@@ -257,7 +259,11 @@ return {
             end
           end,
         },
+        -- css
         cssls = {},
+        tailwindcss = {},
+        -- json
+        jsonls = {},
         wgsl_analyzer = {},
         kotlin_language_server = {},
         ocamllsp = {},
