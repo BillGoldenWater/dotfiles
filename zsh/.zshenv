@@ -25,5 +25,3 @@ export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
 # go
 export PATH="/Users/golden_water/go/bin:$PATH"
-
-export DISPLAY=:0
