@@ -1,0 +1,36 @@
+font-family = "JetBrainsMono Nerd Font Mono"
+font-size = 14
+background = #161616
+foreground = #cccccc
+selection-foreground = #cccccc
+selection-background = #484848
+minimum-contrast = 1.1
+cursor-color = #cccccc
+cursor-text = #161616
+scrollback-limit = 1000000000
+window-padding-x = 0
+window-padding-y = 0
+confirm-close-surface = false
+quick-terminal-position = center
+quick-terminal-screen = mouse
+linux-cgroup = single-instance
+term = xterm-256color
+auto-update = check
+
+# clear all default
+keybind = clear
+
+# quick terminal
+keybind = global:super+alt+space=toggle_quick_terminal
+
+# clipboard
+keybind = copy=copy_to_clipboard
+keybind = paste=paste_from_clipboard
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+
+# window
+keybind = ctrl+n=new_window
+
+# misc
+keybind = super+shift+p=toggle_command_palette

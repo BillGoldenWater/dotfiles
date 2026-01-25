@@ -1,45 +1,17 @@
-font-family = "JetBrainsMono Nerd Font Mono"
-font-size = 14
-background = #161616
-foreground = #cccccc
-selection-foreground = #cccccc
-selection-background = #484848
-minimum-contrast = 1.1
-cursor-color = #cccccc
-cursor-text = #161616
-scrollback-limit = 1000000000
-window-padding-x = 0
-window-padding-y = 0
-confirm-close-surface = false
-quick-terminal-position = center
-quick-terminal-screen = mouse
 macos-titlebar-proxy-icon = hidden
 macos-option-as-alt = true
-linux-cgroup = single-instance
-term = xterm-256color
-auto-update = check
-
-# clear all default
-keybind = clear
-
-# quick terminal
-keybind = global:super+alt+space=toggle_quick_terminal
 
 # clipboard
-keybind = copy=copy_to_clipboard
-keybind = paste=paste_from_clipboard
+keybind = ctrl+shift+c=unbind
+keybind = ctrl+shift+v=unbind
 keybind = super+c=copy_to_clipboard
 keybind = super+v=paste_from_clipboard
 
 # window
+keybind = ctrl+n=unbind
 keybind = super+n=new_window
 keybind = super+w=close_surface
 
 # misc
 keybind = super+q=quit
-keybind = super+arrow_left=text:\\x01
-keybind = super+arrow_right=text:\\x05
-keybind = alt+arrow_left=esc:b
-keybind = alt+arrow_right=esc:f
-keybind = super+backspace=text:\\x15
 keybind = super+shift+p=toggle_command_palette
