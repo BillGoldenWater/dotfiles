@@ -33,6 +33,7 @@ if command -v alacritty >/dev/null; then
     }
 fi
 
+# tmux
 if command -v tmux >/dev/null; then
     tmux_layout_default () {
         if [ -n "$TMUX" ]; then
@@ -59,6 +60,17 @@ if command -v tmux >/dev/null; then
         else
             echo "not in tmux session"
         fi
+    }
+fi
+
+# ffmpeg-full
+if [ -d /opt/homebrew/opt/ffmpeg-full ]; then
+    use_ffmpeg_full () {
+        FFPREFIX="/opt/homebrew/opt/ffmpeg-full"
+        export PATH="$FFPREFIX/bin:$PATH"
+        export LDFLAGS="$LDFLAGS -L$FFPREFIX/lib"
+        export CPPFLAGS="$CPPFLAGS -I$FFPREFIX/include"
+        export PKG_CONFIG_PATH="$FFPREFIX/lib/pkgconfig"
     }
 fi
 
