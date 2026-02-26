@@ -20,6 +20,9 @@ export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
+# llvm-cbe
+export PATH="$HOME/deps/llvm-cbe/build/tools/llvm-cbe:$PATH"
+
 # cargo
 [ -e "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
