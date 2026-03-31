@@ -20,6 +20,9 @@
 - zoxide
 - nvim
 - micromamba
+- nu
+  - avoid history into dotfiles
+    - `mkdir -p ~/.config/nushell`
 
 # Stow Installation
 macOS: `brew install stow`
