@@ -1,6 +1,7 @@
 require 'golden_water.keymap'
 require 'golden_water.autocmd'
 require 'golden_water.lazy'
+require 'golden_water.highlights'
 
 -- neovide
 if vim.g.neovide then
