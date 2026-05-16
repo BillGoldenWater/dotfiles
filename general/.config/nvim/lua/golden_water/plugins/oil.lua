@@ -10,6 +10,7 @@ return {
           ['<C-l>'] = false,
           ['<C-k>'] = false,
           ['<C-j>'] = false,
+          ['~'] = { 'actions.cd', opts = { scope = 'win' }, mode = 'n' },
         },
         view_options = {
           show_hidden = true,
