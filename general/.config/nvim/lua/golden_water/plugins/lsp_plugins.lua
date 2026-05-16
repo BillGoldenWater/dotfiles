@@ -252,16 +252,7 @@ return {
         -- js/ts
         ts_ls = {},
         -- biome = {},
-        denols = {
-          root_dir = function(start_path)
-            local dir = require('lspconfig.util').root_pattern('deno.json', 'deno.jsonrc', '.git')(start_path)
-            if dir ~= nil then
-              return dir
-            else
-              return vim.uv.cwd()
-            end
-          end,
-        },
+        denols = {},
         -- css
         cssls = {},
         tailwindcss = {},
