@@ -1,5 +1,6 @@
 macos-titlebar-proxy-icon = hidden
 macos-option-as-alt = true
+quick-terminal-animation-duration = 0
 
 # clipboard
 keybind = ctrl+shift+c=unbind
