@@ -29,8 +29,5 @@ keybind = paste=paste_from_clipboard
 keybind = ctrl+shift+c=copy_to_clipboard
 keybind = ctrl+shift+v=paste_from_clipboard
 
-# window
-keybind = ctrl+n=new_window
-
 # misc
 keybind = ctrl+shift+p=toggle_command_palette
