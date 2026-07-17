@@ -4,11 +4,4 @@ return {
   'tpope/vim-abolish',
 
   'christoomey/vim-tmux-navigator',
-
-  'wakatime/vim-wakatime',
-
-  'ThePrimeagen/vim-be-good',
-
-  'nanotee/zoxide.vim',
-  'junegunn/fzf',
 }
