@@ -228,9 +228,9 @@ return {
         rust_analyzer = {
           settings = {
             ['rust-analyzer'] = {
-              cargo = {
-                targetDir = true,
-              },
+              -- cargo = {
+              --   targetDir = true,
+              -- },
               check = {
                 command = 'clippy',
               },
