@@ -4,9 +4,7 @@ local stat, err, name = vim.uv.fs_stat(wakatime_cfg)
 if stat == nil and name == 'ENOENT' then
   return {}
 elseif stat ~= nil then
-  return {
-    'wakatime/vim-wakatime',
-  }
+  vim.pack.add { 'https://github.com/wakatime/vim-wakatime' }
 else
   error(err)
 end

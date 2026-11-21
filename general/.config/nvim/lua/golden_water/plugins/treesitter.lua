@@ -1,90 +1,64 @@
-return {
-  { -- Highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
-    lazy = false,
-    build = ':TSUpdate',
-    config = function()
-      local treesitter = require 'nvim-treesitter'
-      treesitter.install { 'c', 'lua', 'vim', 'vimdoc', 'query', 'markdown', 'markdown_inline' }
+local gh = require('golden_water.utils').gh
 
-      local function try_install(ft) end
+vim.pack.add {
+  { src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' },
+}
 
-      vim.api.nvim_create_autocmd('FileType', {
-        callback = function()
-          local function do_init(buf)
-            vim.treesitter.start(buf)
+---@param buf integer
+---@param language string
+local function treesitter_try_attach(buf, language)
+  if not vim.api.nvim_buf_is_valid(buf) then
+    return
+  end
 
-            -- folds, provided by Neovim
-            -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-            -- vim.wo.foldmethod = 'expr'
-            -- indentation, provided by nvim-treesitter
-            -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-          end
+  if not vim.treesitter.language.add(language) then
+    return
+  end
 
-          -- local install = async.wrap()
+  vim.treesitter.start(buf, language)
 
-          local ft = vim.bo.filetype
-          local buf = vim.api.nvim_get_current_buf()
+  -- Enable treesitter based folds
+  -- For more info on folds see `:help folds`
+  -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+  -- vim.wo.foldmethod = 'expr'
 
-          local installed = vim.list_contains(treesitter.get_installed(), ft)
-          if installed then
-            do_init(buf)
-            return
-          end
+  local has_indent_query = vim.treesitter.query.get(language, 'indents') ~= nil
 
-          local available = vim.list_contains(treesitter.get_available(), ft)
-          if not available then
-            return
-          end
+  if has_indent_query then
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end
+end
 
-          local task = treesitter.install { ft }
-          table.insert(task._callbacks, function()
-            if vim.list_contains(vim.api.nvim_list_bufs(), buf) then
-              do_init(buf)
-            end
-          end)
-        end,
-      })
-    end,
-    -- -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-    -- opts = {
-    --   -- A list of parser names, or "all" (the listed parsers MUST always be installed)
-    --   ensure_installed = { 'c', 'lua', 'vim', 'vimdoc', 'query', 'markdown', 'markdown_inline' },
-    --   auto_install = true,
-    --   highlight = {
-    --     enable = true,
-    --
-    --     -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-    --     disable = function(_, buf)
-    --       local max_filesize = 1 * 1024 * 1024 -- 1 MiB
-    --       local ok, stats = pcall((vim.uv or vim.loop).fs_stat, vim.api.nvim_buf_get_name(buf))
-    --       if ok and stats and stats.size > max_filesize then
-    --         return true
-    --       end
-    --     end,
-    --
-    --     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    --     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    --     -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    --     -- Instead of true it can also be a list of languages
-    --     additional_vim_regex_highlighting = { 'ruby' },
-    --   },
-    --   indent = { enable = true, disable = { 'ruby' } },
-    --   incremental_selection = {
-    --     enable = true,
-    --     keymaps = {
-    --       init_selection = 'gnn',
-    --       node_incremental = 'grn',
-    --       scope_incremental = 'grc',
-    --       node_decremental = 'grm',
-    --     },
-    --   },
-    -- },
-    -- There are additional nvim-treesitter modules that you can use to interact
-    -- with nvim-treesitter. You should go explore a few and see what interests you:
-    --
-    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-    --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-    --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-  },
+local available_parsers = require('nvim-treesitter').get_available()
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(args)
+    local buf, filetype = args.buf, args.match
+
+    if filetype == 'wesl' then
+      filetype = 'wgsl'
+    end
+
+    local language = vim.treesitter.language.get_lang(filetype)
+    if not language then
+      return
+    end
+
+    local installed_parsers = require('nvim-treesitter').get_installed 'parsers'
+
+    if vim.tbl_contains(installed_parsers, language) then
+      treesitter_try_attach(buf, language)
+    elseif vim.tbl_contains(available_parsers, language) then
+      require('nvim-treesitter').install(language):await(function()
+        treesitter_try_attach(buf, language)
+      end)
+    else
+      treesitter_try_attach(buf, language)
+    end
+  end,
+})
+
+vim.pack.add { gh 'nvim-treesitter/nvim-treesitter-context' }
+require('treesitter-context').setup {
+  max_lines = 8,
+  multiline_threshold = 1,
 }
